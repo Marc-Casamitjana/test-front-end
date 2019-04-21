@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  API_URL: "/rest/https://woffu-dev.azurewebsites.net/api/v1/users",
   production: false
 };
 

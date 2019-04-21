@@ -1,0 +1,9 @@
+{
+    "/rest": {
+   "target": "https://woffu-dev.azurewebsites.net/api/v1/users",
+   "pathRewrite": {
+     "^/rest": ""
+   },
+   "secure": false
+   }
+   }
