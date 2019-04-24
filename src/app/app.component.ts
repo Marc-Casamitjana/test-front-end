@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { EmployeeService } from './app.service';
-import { progressBar } from './directives/prsogress-bar.directive';
+import { ProgressBarDirective } from './directives/progress-bar.directive';
 
 @Component({
   selector: 'app-root',
@@ -11,38 +11,31 @@ export class AppComponent implements OnInit {
   title = 'app';
   employees;
   percentage: number;
+  average: number;
   
-  // @ViewChild(progressBar)
-  // set progressBar(directive: progressBar){
-  //   this.percentage = directive.percentage;
-  // }
-  
-  constructor(private employeeService: EmployeeService, 
-    private element: ElementRef) { }
+  constructor(private employeeService: EmployeeService) { }
     
     getEmployees() {
       this.employeeService.getEmployees().
       subscribe(employees => { 
-        console.log(employees); 
-        this.employees = employees 
-      }, (err) => console.log(err)),
-      () => {this.employees = this.getProgressBar(this.employees)}
+        this.employees = employees;
+
+        this.employees.map(e => {
+          this.average = (e.UsedDays / e.AvailableDays) * 100
+          let str = e.EmployeeStartDate;
+          e.EmployeeStartDate = str.substring(0, str.indexOf('T')).split('-').join('/');
+          e.Average = Math.floor(this.average);
+      })
+      }, (err) => console.log(err))
       
     }
 
+  ngAfterViewInit() {
+    console.log('percentage', this.percentage)
+  }
   ngOnInit() {
     this.getEmployees();
   }
-
-  getProgressBar(employees) {
-    let average = 0;
-    this.employees = employees.map(e => {
-      average = (e.UsedDays / e.AvailableDays) * 100
-      e.Average = Math.floor(average);
-    })
-  }
-
-
 
 }
 

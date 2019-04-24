@@ -19,10 +19,10 @@ export class EmployeeService {
 
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    headers = headers.append('Authorization', 'Basic Vm5rbGtCSjNCZXBUQUFEV1FscTQlMmYza3RLRldVU2xXeHNucEc0RGxVVlZHS29tbHhsclZVYVElM2QlM2Q6:');
+    headers = headers.append('Authorization', `Basic ${btoa(`${username}:${password}`)}`);
 
     const httpOptions = { headers };
 
-    return this.http.get('http://localhost:3000/users')
+    return this.http.get('https://woffu-dev.azurewebsites.net/api/v1/users', httpOptions);
     }
 }
