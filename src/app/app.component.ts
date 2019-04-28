@@ -10,6 +10,7 @@ import { FormControl } from '@angular/forms';
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'app';
   employees;
+  memoryEmployees;
   percentage: number;
   average: number;
   startDate = new FormControl('');
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.employeeService.getEmployees().
       subscribe(employees => {
         this.employees = employees;
-        console.log(employees);
+        this.memoryEmployees = this.employees;
         this.employees.map(e => {
           this.average = (e.UsedDays / e.AvailableDays) * 100
           let str = e.EmployeeStartDate;
@@ -35,25 +36,28 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   filterByDate() {
+    this.employees = this.memoryEmployees;
     if (!this.startDate.value || !this.endDate.value) return;
 
-    let startDate = this.startDate.value.split('/');
-    let endDate = this.endDate.value.split('/');
-    startDate = Date.UTC(startDate[2], startDate[1], startDate[0])
-    endDate = Date.UTC(endDate[2], endDate[1], endDate[0])
+    let startDate = this.startDate.value.split('-');
+    let endDate = this.endDate.value.split('-');
+    console.log(startDate, endDate)
+    startDate = Date.UTC(startDate[0], startDate[1], startDate[2])
+    endDate = Date.UTC(endDate[0], endDate[1], endDate[2])
 
     this.employees = this.employees.filter(e => {
       if (e.EmployeeStartDate) {
         let employeeDate = e.EmployeeStartDate.split('/');
-        employeeDate = Date.UTC(employeeDate[2], employeeDate[1], employeeDate[0])
+        
+        employeeDate = Date.UTC(employeeDate[2], employeeDate[1], employeeDate[0]);
         return employeeDate > startDate && employeeDate < endDate;
       }
     });
+    this.acronymColor();
   }
 
   acronymColor() {
     let acronyms = document.querySelectorAll(".acronym");
-
     if(acronyms.length){
       acronyms.forEach(element => {
         element.setAttribute('style', `background:${this.getRandomColor()}`)
@@ -66,22 +70,15 @@ export class AppComponent implements OnInit, AfterViewInit {
     return colors[Math.floor(Math.random() * colors.length)];
   }
 
-
-  
-  reverseString(str) {
-  console.log( str.split("").reverse().join(""));
-  }
-
   ngOnInit() {
     this.getEmployees();
-    this.reverseString("hello");
   }
 
   ngAfterViewInit(){
     setTimeout(() => {
       this.acronymColor();
       
-    }, 185);
+    }, 685);
   }
 
 }

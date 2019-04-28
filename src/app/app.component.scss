@@ -48,3 +48,7 @@
      background: hsl(random(360),$s-min+random($s-max+-$s-min),$l-min+random($l-max+-$l-min));
    }
  }
+
+ td {
+     vertical-align: middle;
+ }
