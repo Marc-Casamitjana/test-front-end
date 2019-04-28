@@ -1,34 +1,62 @@
+<nav class="navbar navbar-light bg-primary customHeader">
+  <div>
+    <a class="navbar-brand" href="/">
+      Woffu
+    </a>
+  </div>
+</nav>
+
 <div class="container">
-    <form>
-        <div class="form-group row mb-1 mt-5">
-          <span class="col-md-4">Password</span>
-          <div class="col-md-8">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-          </div>
-        </div>
-      </form>
+  <form>
+    <div class="form-group row mb-1 mt-5">
+      <h3 class="col-md-4">Equipo</h3>
+      <div class="col-md-3">
+        <input type="date" class="form-control" id="startDate" [formControl]="startDate" placeholder="17/08/18">
+      </div>
+      <div class="col-md-3">
+        <input type="date" class="form-control" id="endDate" [formControl]="endDate" placeholder="20/10/18">
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary" (click)="filterByDate()">Filter employees</button>
+      </div>
+    </div>
+  </form>
   <div class="card-body p-0">
-  <table class="table rounded">
-    <thead>
-      <tr>
-        <th class="align-left w-25">Personal information</th>
-        <th>ID</th>
-        <th>Vacations</th>
-        <th class="w-25">Start date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let e of employees">
-        <th class="align-left">{{e.UserId}} - {{e.FirstName}} {{e.LastName}}</th>
-        <td>{{e.UserKey}}</td>
-        <td>
-          <div class="progress">
-            <div appProgressBar [value]="e.Average" class="progress-bar" role="progressbar"></div>
-          </div>
-        </td>
-        <td>{{e.EmployeeStartDate}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <table class="table rounded">
+      <thead>
+        <tr>
+          <th class="align-left w-25">Personal information</th>
+          <th>ID</th>
+          <th>Vacations</th>
+          <th class="w-25">Start date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of employees">
+          <td class="align-left">
+            <div class="customCard">
+              <div>
+                <p class="acronym">{{e.Acronym}}</p>
+              </div>
+              <div>
+                <div>
+                  <h6>{{e.FirstName}} {{e.LastName}}</h6>
+                </div>
+                <div>
+                  {{e.JobTitleId}} - {{e.DepartmentId}}
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>{{e.UserKey}}</td>
+          <td>
+            <div class="progress">
+              <div [ngStyle]="{width: e.Average + 'px'}" class="progress-bar" role="progressbar"></div>
+            </div>
+          </td>
+          <td>{{e.EmployeeStartDate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

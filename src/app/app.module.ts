@@ -5,17 +5,16 @@ import { AppComponent } from './app.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { EmployeesComponent } from './employees/employees.component';
 import {  HttpClientModule } from '@angular/common/http';
-import { ProgressBarDirective } from './directives/progress-bar.directive';
-
-
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeesComponent,
-    ProgressBarDirective
+    EmployeesComponent
   ],
   imports: [
+    ReactiveFormsModule,
+    FormsModule,
     BrowserModule,
     HttpClientModule,
     AgGridModule.withComponents([])

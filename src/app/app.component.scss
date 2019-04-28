@@ -9,3 +9,42 @@
 .align-left {
     text-align: left;
 }
+
+.customHeader {
+    display: flex;
+    justify-content: center;
+}
+
+.customHeader div a {
+    font-weight: 1000;
+    font-size: 30px;
+    color: white;
+}
+
+.acronym {
+    display:inline-block;
+    font-size:1em;
+    width:2.5em;
+    height:2.5em;
+    line-height:2.5em;
+    text-align:center;
+    border-radius:50%;
+    vertical-align:middle;
+    margin-right:1em;
+    color:white;
+ }
+
+ .customCard {
+     display: flex;
+ }
+
+ $s-min: 20;
+ $s-max: 70;
+ $l-min: 30;
+ $l-max: 90;
+ 
+ @for $i from 1 through 100 {
+   .customAc:nth-child(#{$i}) .card-brand-color {
+     background: hsl(random(360),$s-min+random($s-max+-$s-min),$l-min+random($l-max+-$l-min));
+   }
+ }
