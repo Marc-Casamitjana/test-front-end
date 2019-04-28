@@ -26,10 +26,10 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.memoryEmployees = this.employees;
         this.employees.map(e => {
           this.average = (e.UsedDays / e.AvailableDays) * 100
-          let str = e.EmployeeStartDate;
-          e.EmployeeStartDate = str.substring(0, str.indexOf('T')).split('-').reverse().join('/');
+          e.EmployeeStartDate = e.EmployeeStartDate.substring(0, e.EmployeeStartDate.indexOf('T')).split('-').reverse().join('/');
           e.Average = Math.floor(this.average);
-          e.Acronym = e.Acronym.toUpperCase();
+          e.JobTitleId = e.JobTitleId ? e.JobTitleId : 'Unregistered';
+          e.DeparmentId = e.DeparmentId ? e.DeparmentId : 'Unregistered';
         });
       }, (err) => console.log(err))
 
@@ -68,6 +68,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   getRandomColor(){
     let colors = ['red', 'blue', 'green', 'teal', 'rosybrown', 'tan', 'plum', 'saddlebrown'];
     return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  resetFilter(){
+    this.employees = this.memoryEmployees;
+    setTimeout(() => {
+      
+      this.acronymColor();
+    }, 200);
   }
 
   ngOnInit() {

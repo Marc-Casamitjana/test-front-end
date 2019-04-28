@@ -9,22 +9,24 @@
 <div class="container">
   <form>
     <div class="form-group row mb-1 mt-5">
-      <h3 class="col-md-4">Equipo</h3>
+      <h3 class="col-md-1">Equipo</h3>
+      <div class="col-md-3"><p class="pl-5 mt-2">Filtrate employees by date</p></div>
       <div class="col-md-3">
         <input type="date" class="form-control" id="startDate" [formControl]="startDate" placeholder="17/08/18">
       </div>
       <div class="col-md-3">
         <input type="date" class="form-control" id="endDate" [formControl]="endDate" placeholder="20/10/18">
       </div>
-      <div class="col-md-2">
-        <button class="btn btn-primary" (click)="filterByDate()">Filter employees</button>
+      <div class="col-md-2 buttonBox">
+        <button class="btn btn-primary" (click)="filterByDate()">Apply</button>
+        <button class="btn btn-secondary ml-4" (click)="resetFilter()">Clean</button>
       </div>
     </div>
   </form>
   <div class="card-body p-0">
     <table class="table rounded">
       <thead>
-        <tr>
+        <tr class="white">
           <td class="align-left w-25">Personal information</td>
           <td>ID</td>
           <td>Vacations</td>
@@ -36,7 +38,7 @@
           <td class="align-left">
             <div class="customCard">
               <div>
-                <p class="acronym">{{e.Acronym}}</p>
+                <p class="acronym">{{e.Acronym | uppercase}}</p>
               </div>
               <div>
                 <div>

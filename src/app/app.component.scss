@@ -1,5 +1,5 @@
 .rounded thead{
-    background-color:skyblue;
+    background-color:#5C88C4;
 }
 
 .rounded {
@@ -52,3 +52,17 @@
  td {
      vertical-align: middle;
  }
+
+ .white {
+     color: white;
+ }
+
+ @media (max-width: 772px) {
+    input {
+        margin-bottom: 10px;
+    }
+
+    div .buttonBox {
+        justify-content: flex-end;
+    }
+  }
